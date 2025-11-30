@@ -171,10 +171,10 @@
         }
         .lightbox.active { display: flex; opacity: 1; }
         
-        /* Lightbox Media Container */
         .lightbox-content-wrapper {
-            max-width: 90%; max-height: 90%;
+            max-width: 85%; max-height: 85%;
             display: flex; justify-content: center; align-items: center;
+            position: relative;
         }
         .lightbox-content-wrapper img, 
         .lightbox-content-wrapper video {
@@ -190,6 +190,18 @@
         }
         .lightbox-close:hover { transform: scale(1.2) rotate(90deg); color: var(--accent-color); }
 
+        /* LIGHTBOX NAVIGATION ARROWS */
+        .lightbox-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: white;
+            font-size: 3rem; cursor: pointer; padding: 20px;
+            transition: color 0.3s; z-index: 2002;
+        }
+        .lightbox-btn:hover { color: var(--accent-color); }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-btn.hidden { display: none; }
+
         /* --- FOOTER --- */
         footer {
             padding: 4rem 5%; border-top: 1px solid var(--border-color);
@@ -201,6 +213,7 @@
             .hero h1 { font-size: 3.5rem; }
             .gallery { grid-template-columns: 1fr; }
             .lightbox-close { top: 20px; right: 20px; font-size: 2rem; }
+            .lightbox-btn { font-size: 2rem; padding: 10px; }
         }
     </style>
 </head>
@@ -236,106 +249,166 @@
 
     <!-- Gallery Grid -->
     <section class="gallery" id="gallery-grid">
-        
+
         <!-- ==========================================================================
-             CATEGORY: MULTI-SKILL (Supports Slider: Images + Videos)
+             CATEGORY: 3D MODELERS
+             ========================================================================== -->
+
+        <!-- Modeler Dev A -->
+        <div class="gallery-item" data-category="3d-modelers">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444043497333067786/image.png?ex=692d400e&is=692bee8e&hm=3c1d0b665570803c74835b7f86f825d226aced3950f20cf494fc4c9aa3ea3d77&=&format=webp&quality=lossless" class="active" alt="Modeler A 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444043497333067786/image.png?ex=692d400e&is=692bee8e&hm=3c1d0b665570803c74835b7f86f825d226aced3950f20cf494fc4c9aa3ea3d77&=&format=webp&quality=lossless" alt="Modeler A 2">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>3D Modeler</span><h3>Modeler Dev A</h3></div>
+        </div>
+
+        <!-- Modeler Dev B -->
+        <div class="gallery-item" data-category="3d-modelers">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444393366463844454/h800-schermafbeelding-2025-11-26-130809-da7b1d.png?ex=692d3466&is=692be2e6&hm=45c5974f1493e5e1d920e82af62d60528172924f92f1e76bc7926caf59c370bf&=&format=webp&quality=lossless" class="active" alt="Modeler B 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444393367092859142/h800-schermafbeelding-2025-11-26-130549-da7b1d.png?ex=692d3466&is=692be2e6&hm=41b2f6c26803fcba370c1935f14c111af231df28b84f7f7acb3f1efe53ad7801&=&format=webp&quality=lossless" alt="Modeler B 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444393367575335093/h800-schermafbeelding-2025-11-26-130119-4e0a6e.png?ex=692d3466&is=692be2e6&hm=a663798a0098f8918dc5ddbd963b16f31695e7505098097365eaae0812faa190&=&format=webp&quality=lossless" alt="Modeler B 3">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444393368141430824/h800-schermafbeelding-2025-11-26-165450-533dad.png?ex=692d3466&is=692be2e6&hm=8ddfa3756168d71894dcc76fb6d05500873a3d4afca23253980ce8b7ac2b0a45&=&format=webp&quality=lossless&width=1371&height=771" alt="Modeler B 4">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>3D Modeler</span><h3>Modeler Dev B</h3></div>
+        </div>
+
+        <!-- Modeler Dev C -->
+        <div class="gallery-item" data-category="3d-modelers">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444664399754166393/lolaadkd.png?ex=692d8811&is=692c3691&hm=c93fb4c874cec9e4755a24c78241d45ddaa3499b07907d4510ad89415e194e16&=&format=webp&quality=lossless&width=1371&height=771" class="active" alt="Modeler C 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444664400471527474/Double_Eypods.png?ex=692d8811&is=692c3691&hm=1a795a9f1c7ace76b2984c5200d8d9171f0be56e69e1440438e32fb9b1c1a548&=&format=webp&quality=lossless&width=1371&height=771" alt="Modeler C 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444664400760803329/Scp-999_Rendered_Image.png?ex=692d8811&is=692c3691&hm=441ba16ac8b0d6b47be41f8061404ee3cbcd48b1358645c694165c6d2c7bb728&=&format=webp&quality=lossless&width=1371&height=771" alt="Modeler C 3">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>3D Modeler</span><h3>Modeler Dev C</h3></div>
+        </div>
+
+        <!-- Modeler Dev D -->
+        <div class="gallery-item" data-category="3d-modelers">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444725618750001242/thompson_showcase.png?ex=692dc115&is=692c6f95&hm=bde6a00cb30f8c81be380a7d146bae5e1c01d6e5c15366ffe54c4782ecd5dde1&=&format=webp&quality=lossless&width=1371&height=771" class="active" alt="Modeler D 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444725619693846700/PYTHON_SENDO_SEGURADA_SHOWCASE_RENDER_01.png?ex=692dc115&is=692c6f95&hm=c55901957fcfa35a4833f1632c2b4e712b2cc28734cba541db53c2391a1d2c24&=&format=webp&quality=lossless&width=1371&height=771" alt="Modeler D 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444725620259950662/pistola_estilizada_showcase.png?ex=692dc115&is=692c6f95&hm=01e731f47e035f3391071c5922de3b0a3cfa3ca55b5e470613ba51f3008dbd1e&=&format=webp&quality=lossless&width=920&height=771" alt="Modeler D 3">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444725620713066627/espada_showcase.png?ex=692dc115&is=692c6f95&hm=0d4c70d3919f8f2c49c0e330cbf6f18af66f981fa924ac86412ed82ad72bbd30&=&format=webp&quality=lossless&width=1371&height=771" alt="Modeler D 4">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444725621073903760/bolsa_preta_balenciaga.jpg?ex=692dc115&is=692c6f95&hm=efb8f26b1c6f378a0ed108943d9e5c3d1dbcbbeacb769b712bde431a2cb327c8&=&format=webp" alt="Modeler D 5">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>3D Modeler</span><h3>Modeler Dev D</h3></div>
+        </div>
+
+        <!-- ==========================================================================
+             CATEGORY: BUILDERS
+             ========================================================================== -->
+
+        <!-- Builder Dev A -->
+        <div class="gallery-item" data-category="builders">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444313598255173813/image.png?ex=692d92db&is=692c415b&hm=9da6c3b9e599e901c61fc604bb996b1cd8dd98c0a4947dea4b00d3a57330506b&=&format=webp&quality=lossless" class="active" alt="Builder A 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444313598795976776/image.png?ex=692d92dc&is=692c415c&hm=c67af124b1e43f054b7c0a4d35dc5e0b76e759eaa25087f3aa56b2a324dc30dc&=&format=webp&quality=lossless" alt="Builder A 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444313599148560474/image.png?ex=692d92dc&is=692c415c&hm=54fefb2042739266462c9563b06dfaaa0ace9794aacd9eb1b0ac9d65aecf19c7&=&format=webp&quality=lossless" alt="Builder A 3">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444313599555145871/image.png?ex=692d92dc&is=692c415c&hm=0699f14e2210937c12e316919342a71a69ffa5458a96d9bc5d2e03927f60d00a&=&format=webp&quality=lossless" alt="Builder A 4">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>Builder</span><h3>Builder Dev A</h3></div>
+        </div>
+
+        <!-- Builder Dev B -->
+        <div class="gallery-item" data-category="builders">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444105264130293881/image.png?ex=692d7995&is=692c2815&hm=db3907b45ac12041df6ae381cb6ed8d909600319c563dd4923b884fd8edadae6&=&format=webp&quality=lossless" class="active" alt="Builder B 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444105264478425129/image.png?ex=692d7995&is=692c2815&hm=669749bc2e0e0c5ef4ab3bd7c45ff9001091655bcc8c66e95d715b6d15373f87&=&format=webp&quality=lossless" alt="Builder B 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1444105264478425129/image.png?ex=692d7995&is=692c2815&hm=669749bc2e0e0c5ef4ab3bd7c45ff9001091655bcc8c66e95d715b6d15373f87&=&format=webp&quality=lossless" alt="Builder B 3">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>Builder</span><h3>Builder Dev B</h3></div>
+        </div>
+
+        <!-- Builder Dev C -->
+        <div class="gallery-item" data-category="builders">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1441796377519591434/image.png?ex=692da503&is=692c5383&hm=3d18419e96078e521415286f90ed8c2c3b6240c7ba4b6bd163d06b84efd4ee64&=&format=webp&quality=lossless" class="active" alt="Builder C 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1441796377867976754/image.png?ex=692da503&is=692c5383&hm=5fa54bfa137452ea89b7589210225c92c3aa725d7c22f6026e5f5732d5bb23eb&=&format=webp&quality=lossless" alt="Builder C 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1441796378211647589/image.png?ex=692da503&is=692c5383&hm=8c5a2ae4d35982929778ad39f4a049089371bbc7f35bc04d7732f25b5c70c1ff&=&format=webp&quality=lossless" alt="Builder C 3">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1441796378534613135/image.png?ex=692da503&is=692c5383&hm=37983257640006bc9e65e6302e16e17f179494cd9c29895db1e02451c2f2a72f&=&format=webp&quality=lossless" alt="Builder C 4">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1441796378845249646/image.png?ex=692da503&is=692c5383&hm=902c7e308d297e2152ac0d0f1dc3def9ebb3dae81d659017a2ddae9dbcd3e700&=&format=webp&quality=lossless" alt="Builder C 5">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>Builder</span><h3>Builder Dev C</h3></div>
+        </div>
+
+        <!-- ==========================================================================
+             CATEGORY: GFX
+             ========================================================================== -->
+
+        <!-- GFX Dev A -->
+        <div class="gallery-item" data-category="gfx">
+            <div class="slider-wrapper">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636448430522409/image.png?ex=692dbf36&is=692c6db6&hm=6f89f05679cbe9d1f8f78b291232d3c7e6682f84c4ad07cacf3fdec238d87db0&=&format=webp&quality=lossless" class="active" alt="GFX Work 1">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636448736579705/image.png?ex=692dbf36&is=692c6db6&hm=93ed933815390db4076c859027356b5dddb426bf09ab8f7cb0f836c4a0a715b2&=&format=webp&quality=lossless" alt="GFX Work 2">
+                <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636449260994743/image.png?ex=692dbf36&is=692c6db6&hm=e37bf57d5e7d0cf39250882bc669f4583db902021ac8ad2b04d2b5f53df3e139&=&format=webp&quality=lossless" alt="GFX Work 3">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info"><span>Graphics Design</span><h3>GFX Dev A</h3></div>
+        </div>
+
+        <!-- ==========================================================================
+             CATEGORY: MULTI-SKILL (Example: Images + Videos)
              ========================================================================== -->
         <div class="gallery-item" data-category="multi-skill">
             <div class="slider-wrapper">
-                <!-- Image -->
                 <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="active" alt="Full Stack">
-                <!-- Video -->
                 <video src="https://joy1.videvo.net/videvo_files/video/free/2019-11/large_watermarked/190301_1_25_11_preview.mp4" autoplay muted loop playsinline></video>
-                
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
-            <div class="item-info">
-                <span>Multi-Skill</span>
-                <h3>Project Showcase</h3>
-            </div>
+            <div class="item-info"><span>Multi-Skill</span><h3>Project Showcase</h3></div>
         </div>
 
         <!-- ==========================================================================
-             CATEGORY: SCRIPTERS (Supports Slider: Images + Videos)
+             CATEGORY: SCRIPTERS (Example: Images + Videos)
              ========================================================================== -->
         <div class="gallery-item" data-category="scripters">
             <div class="slider-wrapper">
-                <!-- Video 1 (Active) -->
                 <video src="https://joy1.videvo.net/videvo_files/video/free/2015-09/large_watermarked/typing_preview.mp4" class="active" autoplay muted loop playsinline></video>
-                <!-- Image of Code Snippet -->
                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Code Snippet">
-                
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
-            <div class="item-info">
-                <span>Scripter</span>
-                <h3>Combat System Logic</h3>
-            </div>
+            <div class="item-info"><span>Scripter</span><h3>Combat System Logic</h3></div>
         </div>
 
         <!-- ==========================================================================
-             CATEGORY: ANIMATORS (Supports Slider: Images + Videos)
+             CATEGORY: ANIMATORS (Example: Images + Videos)
              ========================================================================== -->
         <div class="gallery-item" data-category="animators">
             <div class="slider-wrapper">
-                <!-- Video 1 (Active) -->
                 <video src="https://joy1.videvo.net/videvo_files/video/free/2019-01/large_watermarked/181015_13_Venice_Beach_Drone_002_preview.mp4" class="active" autoplay muted loop playsinline></video>
-                <!-- Video 2 -->
                 <video src="https://joy1.videvo.net/videvo_files/video/free/2021-04/large_watermarked/210329_06B_Bali_1080p_013_preview.mp4" autoplay muted loop playsinline></video>
-                
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
-            <div class="item-info">
-                <span>Animator</span>
-                <h3>Character Rig & Emotes</h3>
-            </div>
+            <div class="item-info"><span>Animator</span><h3>Character Rig & Emotes</h3></div>
         </div>
 
-        <!-- ==========================================================================
-             CATEGORY: OTHER SKILLS (Single Images Only - As Requested)
-             ========================================================================== -->
-        
-        <!-- GFX (Single Image) -->
-        <div class="gallery-item" data-category="gfx">
-    <div class="slider-wrapper">
-        <!-- Image 1 (Cover - Active) -->
-        <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636448430522409/image.png?ex=692dbf36&is=692c6db6&hm=6f89f05679cbe9d1f8f78b291232d3c7e6682f84c4ad07cacf3fdec238d87db0&=&format=webp&quality=lossless" class="active" alt="GFX Work 1">
-
-        <!-- Image 2 -->
-        <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636448736579705/image.png?ex=692dbf36&is=692c6db6&hm=93ed933815390db4076c859027356b5dddb426bf09ab8f7cb0f836c4a0a715b2&=&format=webp&quality=lossless" alt="GFX Work 2">
-
-        <!-- Image 3 -->
-        <img src="https://media.discordapp.net/attachments/1441177940296728606/1443636449260994743/image.png?ex=692dbf36&is=692c6db6&hm=e37bf57d5e7d0cf39250882bc669f4583db902021ac8ad2b04d2b5f53df3e139&=&format=webp&quality=lossless" alt="GFX Work 3">
-
-        <!-- Navigation Buttons -->
-        <button class="slider-btn prev-btn">&#10094;</button>
-        <button class="slider-btn next-btn">&#10095;</button>
-    </div>
-    
-    <div class="item-info">
-        <span>Graphics Design</span>
-        <h3>GFX Portfolio A</h3>
-    </div>
-</div>
-
-        <!-- Builders (Single Image) -->
-        <div class="gallery-item" data-category="builders">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Builder">
-            <div class="item-info"><span>Builder</span><h3>City Map Environment</h3></div>
-        </div>
-
-        <!-- 3D Modelers (Single Image) -->
-        <div class="gallery-item" data-category="3d-modelers">
-            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="3D Model">
-            <div class="item-info"><span>3D Modeler</span><h3>Weapon Assets Pack</h3></div>
-        </div>
-
-        <!-- UGC (Single Image) -->
+        <!-- UGC (Example) -->
         <div class="gallery-item" data-category="ugc">
-            <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="UGC">
+            <div class="slider-wrapper">
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" class="active" alt="UGC">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
             <div class="item-info"><span>UGC</span><h3>Custom Hats & Accessories</h3></div>
         </div>
 
@@ -348,12 +421,14 @@
         <div><p>&copy; 2025 Anonymous Collective.</p></div>
     </footer>
 
-    <!-- LIGHTBOX MODAL -->
+    <!-- LIGHTBOX MODAL (Now with Arrows) -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
+        <button class="lightbox-btn lightbox-prev">&#10094;</button>
         <div id="lightbox-content-wrapper" class="lightbox-content-wrapper">
             <!-- Content Injected via JS -->
         </div>
+        <button class="lightbox-btn lightbox-next">&#10095;</button>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
@@ -402,7 +477,7 @@
             initSliders();
         });
 
-        // 4. Slider Logic (Works with Img and Video)
+        // 4. Slider Logic (Grid View)
         function initSliders() {
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
@@ -446,37 +521,81 @@
         }, observerOptions);
         galleryItems.forEach(item => { observer.observe(item); });
 
-        // 6. SMART LIGHTBOX LOGIC
+        // 6. SMART LIGHTBOX LOGIC (With Slider Support)
         const lightbox = document.getElementById('lightbox');
         const lightboxContent = document.getElementById('lightbox-content-wrapper');
         const lightboxClose = document.querySelector('.lightbox-close');
+        const lbPrev = document.querySelector('.lightbox-prev');
+        const lbNext = document.querySelector('.lightbox-next');
+
+        let currentLightboxMedia = []; 
+        let currentLightboxIndex = 0; 
+
+        function renderLightboxContent() {
+            lightboxContent.innerHTML = ''; 
+            const media = currentLightboxMedia[currentLightboxIndex];
+
+            if (media.type === 'video') {
+                const video = document.createElement('video');
+                video.src = media.src;
+                video.controls = true; 
+                video.autoplay = true; 
+                video.style.maxWidth = "100%";
+                video.style.maxHeight = "85vh";
+                lightboxContent.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = media.src;
+                lightboxContent.appendChild(img);
+            }
+        }
+
+        function openLightbox(mediaList, startIndex) {
+            currentLightboxMedia = mediaList;
+            currentLightboxIndex = startIndex;
+
+            if (currentLightboxMedia.length > 1) {
+                lbPrev.classList.remove('hidden');
+                lbNext.classList.remove('hidden');
+            } else {
+                lbPrev.classList.add('hidden');
+                lbNext.classList.add('hidden');
+            }
+
+            renderLightboxContent();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
-                let activeMedia = item.querySelector('.slider-wrapper .active');
-                if (!activeMedia) activeMedia = item.querySelector('img, video');
+                const mediaElements = item.querySelectorAll('.slider-wrapper img, .slider-wrapper video, > img, > video');
                 
-                if (activeMedia) {
-                    lightboxContent.innerHTML = ''; 
-                    
-                    if (activeMedia.tagName === 'VIDEO') {
-                        const video = document.createElement('video');
-                        video.src = activeMedia.src;
-                        video.controls = true; 
-                        video.autoplay = true; 
-                        video.style.maxWidth = "100%";
-                        video.style.maxHeight = "85vh";
-                        lightboxContent.appendChild(video);
-                    } else {
-                        const img = document.createElement('img');
-                        img.src = activeMedia.src;
-                        lightboxContent.appendChild(img);
-                    }
-                    
-                    lightbox.classList.add('active'); 
-                    document.body.style.overflow = 'hidden'; 
-                }
+                if (mediaElements.length === 0) return;
+
+                const mediaList = Array.from(mediaElements).map(el => ({
+                    src: el.getAttribute('src'),
+                    type: el.tagName.toLowerCase()
+                }));
+
+                let activeEl = item.querySelector('.active') || mediaElements[0];
+                let startIndex = Array.from(mediaElements).indexOf(activeEl);
+                if (startIndex === -1) startIndex = 0;
+
+                openLightbox(mediaList, startIndex);
             });
+        });
+
+        lbNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxMedia.length;
+            renderLightboxContent();
+        });
+
+        lbPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxMedia.length) % currentLightboxMedia.length;
+            renderLightboxContent();
         });
 
         const closeLightbox = () => {
