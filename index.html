@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | Anonymous Developer Collective</title>
+    <style>
+        /* --- CSS VARIABLES & THEME CONFIG --- */
+        :root {
+            /* Light Theme (Default) */
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-color: #2563eb;
+            --card-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+            --overlay-color: rgba(0, 0, 0, 0.7);
+            --transition-speed: 0.4s;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #0f0f0f;
+            --text-color: #f0f0f0;
+            --accent-color: #60a5fa;
+            --card-bg: #1f1f1f;
+            --border-color: #333333;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION & HEADER --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-speed);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .theme-switch {
+            cursor: pointer;
+            background: none;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switch:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.9;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.2s;
+        }
+
+        .hero p {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        /* --- DIVIDERS --- */
+        .divider-section {
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .divider-line {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            position: relative;
+        }
+
+        .divider-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--text-color);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        /* --- CONTROLS / FILTERS --- */
+        .controls {
+            padding: 2rem 5%;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            background: var(--bg-color); /* To hide content behind when sticky */
+            padding-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding-bottom: 5px;
+            position: relative;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            opacity: 1;
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 5rem 5%;
+            min-height: 50vh;
+        }
+
+        .gallery-item {
+            position: relative;
+            background-color: var(--card-bg);
+            overflow: hidden;
+            border-radius: 4px;
+            opacity: 0; /* For scroll animation */
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: grayscale(100%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .item-info {
+            transform: translateY(0);
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        .item-info span {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">The Collective.</div>
+        <button class="theme-switch" id="theme-toggle">Dark Mode</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Digital<br>Excellence</h1>
+        <p>A curated archive of high-performance web development, UI engineering, and digital products. Built by industry veterans. <br><br><strong>Pure Work. No Names.</strong></p>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider-section">
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="controls">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="web">Websites</button>
+        <button class="filter-btn" data-filter="app">Mobile Apps</button>
+        <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+        <button class="filter-btn" data-filter="ui">UI / Components</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="gallery" id="gallery-grid">
+        
+        <!-- ITEM 1: Website -->
+        <div class="gallery-item" data-category="web">
+            <img src="https://images.unsplash.com/photo-1481487484168-9b930d5b7960?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>Website</span>
+                <h3>Fintech Dashboard</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 2: App -->
+        <div class="gallery-item" data-category="app">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>Mobile App</span>
+                <h3>Health Tracker iOS</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 3: Ecommerce -->
+        <div class="gallery-item" data-category="ecommerce">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>E-Commerce</span>
+                <h3>Luxury Fashion Store</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 4: UI -->
+        <div class="gallery-item" data-category="ui">
+            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>UI Design</span>
+                <h3>Design System V2</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 5: Web -->
+        <div class="gallery-item" data-category="web">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>Website</span>
+                <h3>Corporate Analytics</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 6: App -->
+        <div class="gallery-item" data-category="app">
+            <img src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>Mobile App</span>
+                <h3>Crypto Wallet</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 7: Ecommerce -->
+        <div class="gallery-item" data-category="ecommerce">
+            <img src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>E-Commerce</span>
+                <h3>Coffee Subscription</h3>
+            </div>
+        </div>
+
+         <!-- ITEM 8: Web -->
+         <div class="gallery-item" data-category="web">
+            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800&auto=format&fit=crop" alt="Project Image">
+            <div class="item-info">
+                <span>Website</span>
+                <h3>Architecture Portfolio</h3>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Divider -->
+    <div class="divider-section">
+        <div class="divider-line"></div>
+    </div>
+
+    <footer>
+        <div>
+            <h2>Output /<br>Results.</h2>
+        </div>
+        <div>
+            <p>&copy; 2023 Anonymous Collective.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Theme Switcher Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check local storage for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.setAttribute('data-theme', savedTheme);
+            themeToggle.textContent = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        });
+
+        // 2. Category Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        // Small timeout to allow display:block to render before opacity transition
+                        setTimeout(() => item.classList.add('visible'), 50);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 400); // Wait for fade out
+                    }
+                });
+            });
+        });
+
+        // 3. Scroll Animation (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1, // Trigger when 10% of item is visible
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        galleryItems.forEach(item => {
+            observer.observe(item);
+        });
+
+    </script>
+</body>
+</html>
