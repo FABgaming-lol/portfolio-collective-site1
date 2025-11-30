@@ -17,7 +17,7 @@
             --border-color: #e5e7eb;
             
             /* --- Global Settings --- */
-            --overlay-color: rgba(0, 0, 0, 0.9);
+            --overlay-color: rgba(0, 0, 0, 0.95);
             --transition-speed: 0.4s;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
@@ -113,28 +113,32 @@
         }
         .gallery-item.visible { opacity: 1; transform: translateY(0); }
         
-        /* STANDARD IMAGE STYLES */
-        .gallery-item > img {
+        /* STANDARD MEDIA STYLES (Images & Videos) */
+        .gallery-item > img, 
+        .gallery-item > video {
             width: 100%; height: 350px; object-fit: cover; display: block;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             -webkit-user-drag: none; user-drag: none;
         }
-        .gallery-item:hover > img { transform: scale(1.05); }
+        .gallery-item:hover > img,
+        .gallery-item:hover > video { transform: scale(1.05); }
 
-        /* --- SLIDER (MULTI-IMAGE) STYLES --- */
+        /* --- SLIDER (MULTI-IMAGE/VIDEO) STYLES --- */
         .slider-wrapper {
             width: 100%; height: 350px; position: relative; overflow: hidden;
         }
-        .slider-wrapper img {
+        .slider-wrapper img, 
+        .slider-wrapper video {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             opacity: 0; z-index: 1;
             -webkit-user-drag: none; user-drag: none;
         }
-        .slider-wrapper img.active {
-            opacity: 1; z-index: 2; position: relative; /* Relative keeps layout size */
+        .slider-wrapper img.active,
+        .slider-wrapper video.active {
+            opacity: 1; z-index: 2; position: relative; 
         }
-        .gallery-item:hover .slider-wrapper img.active { transform: scale(1.05); }
+        .gallery-item:hover .slider-wrapper .active { transform: scale(1.05); }
 
         /* SLIDER BUTTONS */
         .slider-btn {
@@ -166,14 +170,23 @@
             transition: opacity 0.3s ease; backdrop-filter: blur(5px);
         }
         .lightbox.active { display: flex; opacity: 1; }
-        .lightbox img {
-            max-width: 90%; max-height: 90%; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        
+        /* Lightbox Media Container */
+        .lightbox-content-wrapper {
+            max-width: 90%; max-height: 90%;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .lightbox-content-wrapper img, 
+        .lightbox-content-wrapper video {
+            max-width: 100%; max-height: 85vh; 
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             border: 2px solid var(--border-color); border-radius: 4px; object-fit: contain;
             -webkit-user-drag: none; user-drag: none;
         }
+
         .lightbox-close {
             position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem;
-            cursor: pointer; font-weight: bold; line-height: 1; transition: transform 0.2s;
+            cursor: pointer; font-weight: bold; line-height: 1; transition: transform 0.2s; z-index: 2001;
         }
         .lightbox-close:hover { transform: scale(1.2) rotate(90deg); color: var(--accent-color); }
 
@@ -225,35 +238,38 @@
     <section class="gallery" id="gallery-grid">
         
         <!-- ==========================================================================
-             SECTION 4: MULTI-SKILL SLIDER (EDIT HERE)
-             To add more images: Add a new <img src="..."> line inside "slider-wrapper".
-             Note: Only one image should have class="active" (the first one).
+             SECTION 4: MIXED MEDIA SLIDERS (Edit Here)
+             You can now add <img> OR <video> inside the slider wrapper.
+             Make sure videos have: autoplay muted loop playsinline
              ========================================================================== -->
 
-        <!-- MULTI-SKILL ITEM 1 -->
+        <!-- MULTI-SKILL ITEM 1: Mixed Image and Video -->
         <div class="gallery-item" data-category="multi-skill">
             <div class="slider-wrapper">
-                <!-- LIST YOUR IMAGES HERE -->
+                <!-- Image 1 (Active) -->
                 <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
-                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop" alt="Image 2">
+                
+                <!-- Video 2 (Use direct .mp4 links) -->
+                <!-- Example video link used here -->
+                <video src="https://joy1.videvo.net/videvo_files/video/free/2019-11/large_watermarked/190301_1_25_11_preview.mp4" autoplay muted loop playsinline></video>
+                
+                <!-- Image 3 -->
                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Image 3">
                 
-                <!-- NAVIGATION ARROWS (Don't Edit) -->
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
             <div class="item-info">
                 <span>Multi-Skill</span>
-                <h3>Full Stack Project</h3>
+                <h3>Project Showcase (Vid/Img)</h3>
             </div>
         </div>
 
-        <!-- MULTI-SKILL ITEM 2 (Example) -->
+        <!-- MULTI-SKILL ITEM 2 -->
         <div class="gallery-item" data-category="multi-skill">
             <div class="slider-wrapper">
                 <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Image 2">
-
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
@@ -263,10 +279,17 @@
             </div>
         </div>
 
-        <!-- ==========================================================================
-             REGULAR ITEMS (SINGLE IMAGES)
-             ========================================================================== -->
+        <!-- SINGLE VIDEO CARD (Example) -->
+        <div class="gallery-item" data-category="animators">
+            <!-- Note: Use 'autoplay muted loop' so it acts like a GIF in the grid -->
+            <video src="https://joy1.videvo.net/videvo_files/video/free/2015-09/large_watermarked/typing_preview.mp4" autoplay muted loop playsinline></video>
+            <div class="item-info">
+                <span>Animator</span>
+                <h3>Character Walk Cycle</h3>
+            </div>
+        </div>
 
+        <!-- STANDARD SINGLE ITEMS -->
         <div class="gallery-item" data-category="gfx">
             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
             <div class="item-info"><span>Graphics Design</span><h3>Game Thumbnail Art</h3></div>
@@ -280,11 +303,6 @@
         <div class="gallery-item" data-category="scripters">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Scripting">
             <div class="item-info"><span>Scripter</span><h3>Combat System Logic</h3></div>
-        </div>
-
-        <div class="gallery-item" data-category="animators">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" alt="Animation">
-            <div class="item-info"><span>Animator</span><h3>Character Rig & Emotes</h3></div>
         </div>
 
         <div class="gallery-item" data-category="3d-modelers">
@@ -309,7 +327,9 @@
     <!-- LIGHTBOX MODAL -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Full Screen View">
+        <div id="lightbox-content-wrapper" class="lightbox-content-wrapper">
+            <!-- Content Injected via JS -->
+        </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
@@ -351,16 +371,14 @@
             });
         });
 
-        // 3. Force Initial View
+        // 3. Force Initial View & Init Sliders
         document.addEventListener('DOMContentLoaded', () => {
             const activeBtn = document.querySelector('.filter-btn.active');
             if(activeBtn) activeBtn.click();
-            
-            // Initialize Sliders (Assign click events)
             initSliders();
         });
 
-        // 4. Slider Logic (Next/Prev Images)
+        // 4. Slider Logic (Works with Img and Video)
         function initSliders() {
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
@@ -368,26 +386,26 @@
                 const next = item.querySelector('.next-btn');
                 
                 if (prev && next) {
-                    const images = item.querySelectorAll('.slider-wrapper img');
+                    // Select both images and videos
+                    const slides = item.querySelectorAll('.slider-wrapper img, .slider-wrapper video');
                     let currentIndex = 0;
 
-                    // Ensure first image is active if not set
-                    if(images.length > 0 && !item.querySelector('.active')) {
-                        images[0].classList.add('active');
+                    if(slides.length > 0 && !item.querySelector('.active')) {
+                        slides[0].classList.add('active');
                     }
 
                     next.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Don't trigger lightbox
-                        images[currentIndex].classList.remove('active');
-                        currentIndex = (currentIndex + 1) % images.length;
-                        images[currentIndex].classList.add('active');
+                        e.stopPropagation(); 
+                        slides[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex + 1) % slides.length;
+                        slides[currentIndex].classList.add('active');
                     });
 
                     prev.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Don't trigger lightbox
-                        images[currentIndex].classList.remove('active');
-                        currentIndex = (currentIndex - 1 + images.length) % images.length;
-                        images[currentIndex].classList.add('active');
+                        e.stopPropagation(); 
+                        slides[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        slides[currentIndex].classList.add('active');
                     });
                 }
             });
@@ -405,20 +423,36 @@
         }, observerOptions);
         galleryItems.forEach(item => { observer.observe(item); });
 
-        // 6. Lightbox (Popup) Logic
+        // 6. SMART LIGHTBOX LOGIC (Detects Video vs Image)
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxContent = document.getElementById('lightbox-content-wrapper');
         const lightboxClose = document.querySelector('.lightbox-close');
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
-                // Find the currently active image in slider OR the standard image
-                let img = item.querySelector('.slider-wrapper img.active');
-                if (!img) img = item.querySelector('img'); // Fallback for single images
+                // Find currently active element (Slider or Single)
+                let activeMedia = item.querySelector('.slider-wrapper .active');
+                if (!activeMedia) activeMedia = item.querySelector('img, video');
                 
-                if (img) {
-                    const src = img.getAttribute('src');
-                    lightboxImg.setAttribute('src', src);
+                if (activeMedia) {
+                    lightboxContent.innerHTML = ''; // Clear previous content
+                    
+                    if (activeMedia.tagName === 'VIDEO') {
+                        // Create Video Player
+                        const video = document.createElement('video');
+                        video.src = activeMedia.src;
+                        video.controls = true; // Enable User Controls
+                        video.autoplay = true; // Auto Play
+                        video.style.maxWidth = "100%";
+                        video.style.maxHeight = "85vh";
+                        lightboxContent.appendChild(video);
+                    } else {
+                        // Create Image
+                        const img = document.createElement('img');
+                        img.src = activeMedia.src;
+                        lightboxContent.appendChild(img);
+                    }
+                    
                     lightbox.classList.add('active'); 
                     document.body.style.overflow = 'hidden'; 
                 }
@@ -427,6 +461,7 @@
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
+            lightboxContent.innerHTML = ''; // Stop video playback
             document.body.style.overflow = 'auto'; 
         };
         lightboxClose.addEventListener('click', closeLightbox);
