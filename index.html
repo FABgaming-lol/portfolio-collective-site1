@@ -109,19 +109,50 @@
             position: relative; background-color: var(--card-bg); overflow: hidden;
             border-radius: 4px; opacity: 0; transform: translateY(50px);
             transition: opacity 0.6s ease, transform 0.6s ease; cursor: zoom-in;
-            display: none; /* Default hidden to prevent flash of mixed content */
+            display: none; 
         }
         .gallery-item.visible { opacity: 1; transform: translateY(0); }
-        .gallery-item img {
+        
+        /* STANDARD IMAGE STYLES */
+        .gallery-item > img {
             width: 100%; height: 350px; object-fit: cover; display: block;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             -webkit-user-drag: none; user-drag: none;
         }
-        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item:hover > img { transform: scale(1.05); }
+
+        /* --- SLIDER (MULTI-IMAGE) STYLES --- */
+        .slider-wrapper {
+            width: 100%; height: 350px; position: relative; overflow: hidden;
+        }
+        .slider-wrapper img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0; z-index: 1;
+            -webkit-user-drag: none; user-drag: none;
+        }
+        .slider-wrapper img.active {
+            opacity: 1; z-index: 2; position: relative; /* Relative keeps layout size */
+        }
+        .gallery-item:hover .slider-wrapper img.active { transform: scale(1.05); }
+
+        /* SLIDER BUTTONS */
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+            background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+            padding: 10px 15px; cursor: pointer; font-size: 18px; border-radius: 2px;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .slider-btn { opacity: 1; }
+        .prev-btn { left: 0; }
+        .next-btn { right: 0; }
+        .slider-btn:hover { background-color: var(--accent-color); }
+
+        /* INFO OVERLAY */
         .item-info {
             position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem;
             background: linear-gradient(to top, var(--bg-color), transparent);
-            transform: translateY(100%); transition: transform 0.4s ease; pointer-events: none;
+            transform: translateY(100%); transition: transform 0.4s ease; pointer-events: none; z-index: 20;
         }
         .gallery-item:hover .item-info { transform: translateY(0); }
         .item-info h3 { font-size: 1.2rem; text-transform: uppercase; font-weight: 800; color: var(--text-color); }
@@ -179,12 +210,8 @@
         <div class="divider-line"></div>
     </div>
 
-    <!-- ==========================================================================
-         SECTION 3: EDIT CATEGORY BUTTONS
-         Note: The "All Work" button is gone. "Multi-Skill" is now the default.
-         ========================================================================== -->
+    <!-- Controls -->
     <div class="controls">
-        <!-- Replaced 'all' with 'multi-skill' -->
         <button class="filter-btn active" data-filter="multi-skill">Multi-Skill</button>
         <button class="filter-btn" data-filter="gfx">Graphics Design - GFX</button>
         <button class="filter-btn" data-filter="builders">Builders</button>
@@ -198,96 +225,85 @@
     <section class="gallery" id="gallery-grid">
         
         <!-- ==========================================================================
-             SECTION 4: EDIT IMAGES
-             Make sure your data-category matches the button you want it to appear under.
+             SECTION 4: MULTI-SKILL SLIDER (EDIT HERE)
+             To add more images: Add a new <img src="..."> line inside "slider-wrapper".
+             Note: Only one image should have class="active" (the first one).
              ========================================================================== -->
 
-        <!-- ITEM 1: MULTI-SKILL (Example Item for the new category) -->
+        <!-- MULTI-SKILL ITEM 1 -->
         <div class="gallery-item" data-category="multi-skill">
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" alt="Multi Skill">
+            <div class="slider-wrapper">
+                <!-- LIST YOUR IMAGES HERE -->
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
+                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop" alt="Image 2">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Image 3">
+                
+                <!-- NAVIGATION ARROWS (Don't Edit) -->
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
             <div class="item-info">
                 <span>Multi-Skill</span>
                 <h3>Full Stack Project</h3>
             </div>
         </div>
 
-        <!-- ITEM 2: GFX -->
-        <div class="gallery-item" data-category="gfx">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
-            <div class="item-info">
-                <span>Graphics Design</span>
-                <h3>Game Thumbnail Art</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 3: Builder -->
-        <div class="gallery-item" data-category="builders">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Builder">
-            <div class="item-info">
-                <span>Builder</span>
-                <h3>City Map Environment</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 4: Scripter -->
-        <div class="gallery-item" data-category="scripters">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Scripting">
-            <div class="item-info">
-                <span>Scripter</span>
-                <h3>Combat System Logic</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 5: Animator -->
-        <div class="gallery-item" data-category="animators">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" alt="Animation">
-            <div class="item-info">
-                <span>Animator</span>
-                <h3>Character Rig & Emotes</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 6: 3D Modeler -->
-        <div class="gallery-item" data-category="3d-modelers">
-            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="3D Model">
-            <div class="item-info">
-                <span>3D Modeler</span>
-                <h3>Weapon Assets Pack</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 7: UGC -->
-        <div class="gallery-item" data-category="ugc">
-            <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="UGC">
-            <div class="item-info">
-                <span>UGC</span>
-                <h3>Custom Hats & Accessories</h3>
-            </div>
-        </div>
-
-        <!-- ITEM 8: Multi-Skill (Extra) -->
+        <!-- MULTI-SKILL ITEM 2 (Example) -->
         <div class="gallery-item" data-category="multi-skill">
-            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop" alt="Multi Skill">
+            <div class="slider-wrapper">
+                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Image 2">
+
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
             <div class="item-info">
                 <span>Multi-Skill</span>
-                <h3>Design & Code Bundle</h3>
+                <h3>Architecture Bundle</h3>
             </div>
+        </div>
+
+        <!-- ==========================================================================
+             REGULAR ITEMS (SINGLE IMAGES)
+             ========================================================================== -->
+
+        <div class="gallery-item" data-category="gfx">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
+            <div class="item-info"><span>Graphics Design</span><h3>Game Thumbnail Art</h3></div>
+        </div>
+
+        <div class="gallery-item" data-category="builders">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Builder">
+            <div class="item-info"><span>Builder</span><h3>City Map Environment</h3></div>
+        </div>
+
+        <div class="gallery-item" data-category="scripters">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Scripting">
+            <div class="item-info"><span>Scripter</span><h3>Combat System Logic</h3></div>
+        </div>
+
+        <div class="gallery-item" data-category="animators">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" alt="Animation">
+            <div class="item-info"><span>Animator</span><h3>Character Rig & Emotes</h3></div>
+        </div>
+
+        <div class="gallery-item" data-category="3d-modelers">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="3D Model">
+            <div class="item-info"><span>3D Modeler</span><h3>Weapon Assets Pack</h3></div>
+        </div>
+
+        <div class="gallery-item" data-category="ugc">
+            <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="UGC">
+            <div class="item-info"><span>UGC</span><h3>Custom Hats & Accessories</h3></div>
         </div>
 
     </section>
 
-    <!-- Divider -->
-    <div class="divider-section">
-        <div class="divider-line"></div>
-    </div>
+    <div class="divider-section"><div class="divider-line"></div></div>
 
     <footer>
-        <div>
-            <h2>Output /<br>Results.</h2>
-        </div>
-        <div>
-            <p>&copy; 2025 Anonymous Collective.</p>
-        </div>
+        <div><h2>Output /<br>Results.</h2></div>
+        <div><p>&copy; 2025 Anonymous Collective.</p></div>
     </footer>
 
     <!-- LIGHTBOX MODAL -->
@@ -314,21 +330,16 @@
             themeToggle.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
         });
 
-        // 2. Category Filtering (STRICT MODE - NO MIX)
+        // 2. Category Filtering
         const filterBtns = document.querySelectorAll('.filter-btn');
         const galleryItems = document.querySelectorAll('.gallery-item');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 btn.classList.add('active');
-
                 const filterValue = btn.getAttribute('data-filter');
-
                 galleryItems.forEach(item => {
-                    // STRICT CHECK: Item category must match button exactly
                     if (item.getAttribute('data-category') === filterValue) {
                         item.style.display = 'block';
                         setTimeout(() => item.classList.add('visible'), 50);
@@ -340,15 +351,49 @@
             });
         });
 
-        // 3. FORCE INITIAL FILTER (Simulate click on the first button so no mix is shown)
+        // 3. Force Initial View
         document.addEventListener('DOMContentLoaded', () => {
             const activeBtn = document.querySelector('.filter-btn.active');
-            if(activeBtn) {
-                activeBtn.click();
-            }
+            if(activeBtn) activeBtn.click();
+            
+            // Initialize Sliders (Assign click events)
+            initSliders();
         });
 
-        // 4. Scroll Animation
+        // 4. Slider Logic (Next/Prev Images)
+        function initSliders() {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                const prev = item.querySelector('.prev-btn');
+                const next = item.querySelector('.next-btn');
+                
+                if (prev && next) {
+                    const images = item.querySelectorAll('.slider-wrapper img');
+                    let currentIndex = 0;
+
+                    // Ensure first image is active if not set
+                    if(images.length > 0 && !item.querySelector('.active')) {
+                        images[0].classList.add('active');
+                    }
+
+                    next.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Don't trigger lightbox
+                        images[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add('active');
+                    });
+
+                    prev.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Don't trigger lightbox
+                        images[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        images[currentIndex].classList.add('active');
+                    });
+                }
+            });
+        }
+
+        // 5. Scroll Animation
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -360,18 +405,23 @@
         }, observerOptions);
         galleryItems.forEach(item => { observer.observe(item); });
 
-        // 5. Lightbox (Popup) Logic
+        // 6. Lightbox (Popup) Logic
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                const src = img.getAttribute('src');
-                lightboxImg.setAttribute('src', src);
-                lightbox.classList.add('active'); 
-                document.body.style.overflow = 'hidden'; 
+                // Find the currently active image in slider OR the standard image
+                let img = item.querySelector('.slider-wrapper img.active');
+                if (!img) img = item.querySelector('img'); // Fallback for single images
+                
+                if (img) {
+                    const src = img.getAttribute('src');
+                    lightboxImg.setAttribute('src', src);
+                    lightbox.classList.add('active'); 
+                    document.body.style.overflow = 'hidden'; 
+                }
             });
         });
 
@@ -384,7 +434,7 @@
             if (e.target === lightbox) { closeLightbox(); }
         });
 
-        // 6. CONTENT PROTECTION SCRIPTS
+        // 7. Content Protection
         document.addEventListener('contextmenu', (e) => { e.preventDefault(); }); 
         document.addEventListener('dragstart', (e) => { e.preventDefault(); });   
         document.addEventListener('keydown', (e) => {
