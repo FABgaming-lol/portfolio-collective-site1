@@ -568,9 +568,18 @@
         }
 
         galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const mediaElements = item.querySelectorAll('.slider-wrapper img, .slider-wrapper video, > img, > video');
+            item.addEventListener('click', (e) => {
+                // Prevent triggering if clicking navigation buttons inside the grid card
+                if(e.target.closest('.slider-btn')) return; 
+
+                // 1. Try finding media inside a slider wrapper first
+                let mediaElements = item.querySelectorAll('.slider-wrapper img, .slider-wrapper video');
                 
+                // 2. If no slider, find direct media (fallback)
+                if (mediaElements.length === 0) {
+                    mediaElements = item.querySelectorAll('img, video');
+                }
+
                 if (mediaElements.length === 0) return;
 
                 const mediaList = Array.from(mediaElements).map(el => ({
