@@ -238,78 +238,85 @@
     <section class="gallery" id="gallery-grid">
         
         <!-- ==========================================================================
-             SECTION 4: MIXED MEDIA SLIDERS (Edit Here)
-             You can now add <img> OR <video> inside the slider wrapper.
-             Make sure videos have: autoplay muted loop playsinline
+             CATEGORY: MULTI-SKILL (Supports Slider: Images + Videos)
              ========================================================================== -->
-
-        <!-- MULTI-SKILL ITEM 1: Mixed Image and Video -->
         <div class="gallery-item" data-category="multi-skill">
             <div class="slider-wrapper">
-                <!-- Image 1 (Active) -->
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
-                
-                <!-- Video 2 (Use direct .mp4 links) -->
-                <!-- Example video link used here -->
+                <!-- Image -->
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="active" alt="Full Stack">
+                <!-- Video -->
                 <video src="https://joy1.videvo.net/videvo_files/video/free/2019-11/large_watermarked/190301_1_25_11_preview.mp4" autoplay muted loop playsinline></video>
                 
-                <!-- Image 3 -->
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Image 3">
+                <button class="slider-btn prev-btn">&#10094;</button>
+                <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="item-info">
+                <span>Multi-Skill</span>
+                <h3>Project Showcase</h3>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             CATEGORY: SCRIPTERS (Supports Slider: Images + Videos)
+             ========================================================================== -->
+        <div class="gallery-item" data-category="scripters">
+            <div class="slider-wrapper">
+                <!-- Video 1 (Active) -->
+                <video src="https://joy1.videvo.net/videvo_files/video/free/2015-09/large_watermarked/typing_preview.mp4" class="active" autoplay muted loop playsinline></video>
+                <!-- Image of Code Snippet -->
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Code Snippet">
                 
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
             <div class="item-info">
-                <span>Multi-Skill</span>
-                <h3>Project Showcase (Vid/Img)</h3>
+                <span>Scripter</span>
+                <h3>Combat System Logic</h3>
             </div>
         </div>
 
-        <!-- MULTI-SKILL ITEM 2 -->
-        <div class="gallery-item" data-category="multi-skill">
+        <!-- ==========================================================================
+             CATEGORY: ANIMATORS (Supports Slider: Images + Videos)
+             ========================================================================== -->
+        <div class="gallery-item" data-category="animators">
             <div class="slider-wrapper">
-                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800&auto=format&fit=crop" class="active" alt="Image 1">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Image 2">
+                <!-- Video 1 (Active) -->
+                <video src="https://joy1.videvo.net/videvo_files/video/free/2019-01/large_watermarked/181015_13_Venice_Beach_Drone_002_preview.mp4" class="active" autoplay muted loop playsinline></video>
+                <!-- Video 2 -->
+                <video src="https://joy1.videvo.net/videvo_files/video/free/2021-04/large_watermarked/210329_06B_Bali_1080p_013_preview.mp4" autoplay muted loop playsinline></video>
+                
                 <button class="slider-btn prev-btn">&#10094;</button>
                 <button class="slider-btn next-btn">&#10095;</button>
             </div>
             <div class="item-info">
-                <span>Multi-Skill</span>
-                <h3>Architecture Bundle</h3>
-            </div>
-        </div>
-
-        <!-- SINGLE VIDEO CARD (Example) -->
-        <div class="gallery-item" data-category="animators">
-            <!-- Note: Use 'autoplay muted loop' so it acts like a GIF in the grid -->
-            <video src="https://joy1.videvo.net/videvo_files/video/free/2015-09/large_watermarked/typing_preview.mp4" autoplay muted loop playsinline></video>
-            <div class="item-info">
                 <span>Animator</span>
-                <h3>Character Walk Cycle</h3>
+                <h3>Character Rig & Emotes</h3>
             </div>
         </div>
 
-        <!-- STANDARD SINGLE ITEMS -->
+        <!-- ==========================================================================
+             CATEGORY: OTHER SKILLS (Single Images Only - As Requested)
+             ========================================================================== -->
+        
+        <!-- GFX (Single Image) -->
         <div class="gallery-item" data-category="gfx">
             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
             <div class="item-info"><span>Graphics Design</span><h3>Game Thumbnail Art</h3></div>
         </div>
 
+        <!-- Builders (Single Image) -->
         <div class="gallery-item" data-category="builders">
             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Builder">
             <div class="item-info"><span>Builder</span><h3>City Map Environment</h3></div>
         </div>
 
-        <div class="gallery-item" data-category="scripters">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Scripting">
-            <div class="item-info"><span>Scripter</span><h3>Combat System Logic</h3></div>
-        </div>
-
+        <!-- 3D Modelers (Single Image) -->
         <div class="gallery-item" data-category="3d-modelers">
             <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="3D Model">
             <div class="item-info"><span>3D Modeler</span><h3>Weapon Assets Pack</h3></div>
         </div>
 
+        <!-- UGC (Single Image) -->
         <div class="gallery-item" data-category="ugc">
             <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="UGC">
             <div class="item-info"><span>UGC</span><h3>Custom Hats & Accessories</h3></div>
@@ -386,7 +393,6 @@
                 const next = item.querySelector('.next-btn');
                 
                 if (prev && next) {
-                    // Select both images and videos
                     const slides = item.querySelectorAll('.slider-wrapper img, .slider-wrapper video');
                     let currentIndex = 0;
 
@@ -423,31 +429,28 @@
         }, observerOptions);
         galleryItems.forEach(item => { observer.observe(item); });
 
-        // 6. SMART LIGHTBOX LOGIC (Detects Video vs Image)
+        // 6. SMART LIGHTBOX LOGIC
         const lightbox = document.getElementById('lightbox');
         const lightboxContent = document.getElementById('lightbox-content-wrapper');
         const lightboxClose = document.querySelector('.lightbox-close');
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
-                // Find currently active element (Slider or Single)
                 let activeMedia = item.querySelector('.slider-wrapper .active');
                 if (!activeMedia) activeMedia = item.querySelector('img, video');
                 
                 if (activeMedia) {
-                    lightboxContent.innerHTML = ''; // Clear previous content
+                    lightboxContent.innerHTML = ''; 
                     
                     if (activeMedia.tagName === 'VIDEO') {
-                        // Create Video Player
                         const video = document.createElement('video');
                         video.src = activeMedia.src;
-                        video.controls = true; // Enable User Controls
-                        video.autoplay = true; // Auto Play
+                        video.controls = true; 
+                        video.autoplay = true; 
                         video.style.maxWidth = "100%";
                         video.style.maxHeight = "85vh";
                         lightboxContent.appendChild(video);
                     } else {
-                        // Create Image
                         const img = document.createElement('img');
                         img.src = activeMedia.src;
                         lightboxContent.appendChild(img);
@@ -461,7 +464,7 @@
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
-            lightboxContent.innerHTML = ''; // Stop video playback
+            lightboxContent.innerHTML = ''; 
             document.body.style.overflow = 'auto'; 
         };
         lightboxClose.addEventListener('click', closeLightbox);
