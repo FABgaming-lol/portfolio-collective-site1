@@ -7,18 +7,17 @@
     <style>
         /* ==========================================================================
            SECTION 1: EDIT COLORS & FONTS
-           Change the hex codes (e.g., #ffffff) to change the site theme.
            ========================================================================== */
         :root {
             /* --- Light Theme Settings --- */
-            --bg-color: #ffffff;           /* Main Background */
-            --text-color: #1a1a1a;         /* Main Text */
-            --accent-color: #2563eb;       /* Blue Highlights */
-            --card-bg: #f3f4f6;            /* Background behind images */
-            --border-color: #e5e7eb;       /* Light grey lines */
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-color: #2563eb;
+            --card-bg: #f3f4f6;
+            --border-color: #e5e7eb;
             
             /* --- Global Settings --- */
-            --overlay-color: rgba(0, 0, 0, 0.9); /* Dark backdrop for popup */
+            --overlay-color: rgba(0, 0, 0, 0.9);
             --transition-speed: 0.4s;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
@@ -43,7 +42,7 @@
             overflow-x: hidden;
             line-height: 1.6;
             
-            /* PREVENTS HIGHLIGHTING TEXT (Content Protection) */
+            /* CONTENT PROTECTION */
             -webkit-user-select: none;
             -ms-user-select: none;
             user-select: none;
@@ -110,12 +109,13 @@
             position: relative; background-color: var(--card-bg); overflow: hidden;
             border-radius: 4px; opacity: 0; transform: translateY(50px);
             transition: opacity 0.6s ease, transform 0.6s ease; cursor: zoom-in;
+            display: none; /* Default hidden to prevent flash of mixed content */
         }
         .gallery-item.visible { opacity: 1; transform: translateY(0); }
         .gallery-item img {
             width: 100%; height: 350px; object-fit: cover; display: block;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            -webkit-user-drag: none; user-drag: none; /* Prevents Dragging */
+            -webkit-user-drag: none; user-drag: none;
         }
         .gallery-item:hover img { transform: scale(1.05); }
         .item-info {
@@ -168,10 +168,7 @@
         <button class="theme-switch" id="theme-toggle">Dark Mode</button>
     </nav>
 
-    <!-- ==========================================================================
-         SECTION 2: EDIT HERO TEXT
-         Change the title and description of your site here.
-         ========================================================================== -->
+    <!-- Hero Section -->
     <section class="hero">
         <h1>Digital<br>Excellence</h1>
         <p>A curated archive of high-performance development, engineering, and digital products. <br><br><strong>Pure Work. No Names.</strong></p>
@@ -184,12 +181,11 @@
 
     <!-- ==========================================================================
          SECTION 3: EDIT CATEGORY BUTTONS
-         1. 'data-filter' must be a simple, lowercase nickname (e.g., "gfx", "app").
-         2. The text inside the button is what users see.
-         3. Do NOT remove "All Work".
+         Note: The "All Work" button is gone. "Multi-Skill" is now the default.
          ========================================================================== -->
     <div class="controls">
-        <button class="filter-btn active" data-filter="all">All Work</button>
+        <!-- Replaced 'all' with 'multi-skill' -->
+        <button class="filter-btn active" data-filter="multi-skill">Multi-Skill</button>
         <button class="filter-btn" data-filter="gfx">Graphics Design - GFX</button>
         <button class="filter-btn" data-filter="builders">Builders</button>
         <button class="filter-btn" data-filter="scripters">Scripters</button>
@@ -202,25 +198,29 @@
     <section class="gallery" id="gallery-grid">
         
         <!-- ==========================================================================
-             SECTION 4: EDIT IMAGES (PROJECTS)
-             
-             HOW TO ADD A NEW PROJECT:
-             1. Copy the code block from <div class="gallery-item" ...> to </div>
-             2. Change 'data-category' to match one of the buttons above (e.g., "gfx").
-             3. Replace the 'src' link with your image URL.
-             4. Change the text inside <span> and <h3>.
+             SECTION 4: EDIT IMAGES
+             Make sure your data-category matches the button you want it to appear under.
              ========================================================================== -->
 
-        <!-- ITEM 1 -->
-        <div class="gallery-item" data-category="gfx">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
+        <!-- ITEM 1: MULTI-SKILL (Example Item for the new category) -->
+        <div class="gallery-item" data-category="multi-skill">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" alt="Multi Skill">
             <div class="item-info">
-                <span>Graphics Design</span> <!-- Small Label -->
-                <h3>Game Thumbnail Art</h3> <!-- Main Title -->
+                <span>Multi-Skill</span>
+                <h3>Full Stack Project</h3>
             </div>
         </div>
 
-        <!-- ITEM 2 -->
+        <!-- ITEM 2: GFX -->
+        <div class="gallery-item" data-category="gfx">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="GFX">
+            <div class="item-info">
+                <span>Graphics Design</span>
+                <h3>Game Thumbnail Art</h3>
+            </div>
+        </div>
+
+        <!-- ITEM 3: Builder -->
         <div class="gallery-item" data-category="builders">
             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Builder">
             <div class="item-info">
@@ -229,7 +229,7 @@
             </div>
         </div>
 
-        <!-- ITEM 3 -->
+        <!-- ITEM 4: Scripter -->
         <div class="gallery-item" data-category="scripters">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Scripting">
             <div class="item-info">
@@ -238,7 +238,7 @@
             </div>
         </div>
 
-        <!-- ITEM 4 -->
+        <!-- ITEM 5: Animator -->
         <div class="gallery-item" data-category="animators">
             <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop" alt="Animation">
             <div class="item-info">
@@ -247,7 +247,7 @@
             </div>
         </div>
 
-        <!-- ITEM 5 -->
+        <!-- ITEM 6: 3D Modeler -->
         <div class="gallery-item" data-category="3d-modelers">
             <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop" alt="3D Model">
             <div class="item-info">
@@ -256,7 +256,7 @@
             </div>
         </div>
 
-        <!-- ITEM 6 -->
+        <!-- ITEM 7: UGC -->
         <div class="gallery-item" data-category="ugc">
             <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop" alt="UGC">
             <div class="item-info">
@@ -265,21 +265,12 @@
             </div>
         </div>
 
-        <!-- ITEM 7 -->
-        <div class="gallery-item" data-category="gfx">
-            <img src="https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=800&auto=format&fit=crop" alt="GFX">
+        <!-- ITEM 8: Multi-Skill (Extra) -->
+        <div class="gallery-item" data-category="multi-skill">
+            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop" alt="Multi Skill">
             <div class="item-info">
-                <span>Graphics Design</span>
-                <h3>UI/UX Icon Set</h3>
-            </div>
-        </div>
-
-         <!-- ITEM 8 -->
-         <div class="gallery-item" data-category="builders">
-            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop" alt="Builder">
-            <div class="item-info">
-                <span>Builder</span>
-                <h3>Lobby Spawn Area</h3>
+                <span>Multi-Skill</span>
+                <h3>Design & Code Bundle</h3>
             </div>
         </div>
 
@@ -299,7 +290,7 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX MODAL (Do not edit unless you know HTML) -->
+    <!-- LIGHTBOX MODAL -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img id="lightbox-img" src="" alt="Full Screen View">
@@ -307,11 +298,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* 
-           NOTE: You generally do not need to edit the Javascript below.
-           It handles the theme switching, filtering, popup logic, and protection automatically.
-        */
-
         // 1. Theme Switcher Logic
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -328,16 +314,22 @@
             themeToggle.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
         });
 
-        // 2. Category Filtering
+        // 2. Category Filtering (STRICT MODE - NO MIX)
         const filterBtns = document.querySelectorAll('.filter-btn');
         const galleryItems = document.querySelectorAll('.gallery-item');
+
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Remove active class from all buttons
                 filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
                 btn.classList.add('active');
+
                 const filterValue = btn.getAttribute('data-filter');
+
                 galleryItems.forEach(item => {
-                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    // STRICT CHECK: Item category must match button exactly
+                    if (item.getAttribute('data-category') === filterValue) {
                         item.style.display = 'block';
                         setTimeout(() => item.classList.add('visible'), 50);
                     } else {
@@ -348,7 +340,15 @@
             });
         });
 
-        // 3. Scroll Animation
+        // 3. FORCE INITIAL FILTER (Simulate click on the first button so no mix is shown)
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            if(activeBtn) {
+                activeBtn.click();
+            }
+        });
+
+        // 4. Scroll Animation
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -360,7 +360,7 @@
         }, observerOptions);
         galleryItems.forEach(item => { observer.observe(item); });
 
-        // 4. Lightbox (Popup) Logic
+        // 5. Lightbox (Popup) Logic
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
@@ -384,11 +384,11 @@
             if (e.target === lightbox) { closeLightbox(); }
         });
 
-        // 5. CONTENT PROTECTION SCRIPTS
-        document.addEventListener('contextmenu', (e) => { e.preventDefault(); }); // No Right Click
-        document.addEventListener('dragstart', (e) => { e.preventDefault(); });   // No Dragging
+        // 6. CONTENT PROTECTION SCRIPTS
+        document.addEventListener('contextmenu', (e) => { e.preventDefault(); }); 
+        document.addEventListener('dragstart', (e) => { e.preventDefault(); });   
         document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'u')) { e.preventDefault(); } // No Save/View Source
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'u')) { e.preventDefault(); } 
         });
 
     </script>
